@@ -9,28 +9,28 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { PersistenceService } from 'src/app/shared/services/persistence.service';
 
 import {
-  registerAction,
-  registerSuccessAction,
-  registerFailureAction,
-} from 'src/app/auth/store/actions/register.action';
+  loginAction,
+  loginSuccessAction,
+  loginFailureAction,
+} from 'src/app/auth/store/actions/login.action';
 
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class RegisterEffect {
-  register$ = createEffect(() =>
+export class LoginEffect {
+  login$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(registerAction),
+      ofType(loginAction),
       switchMap(({ request }) =>
-        this.authService.Register(request).pipe(
+        this.authService.Login(request).pipe(
           map((currentUser: CurrentUserInterface) => {
             this.persistenceService.setItem('accessToken', currentUser.token);
-            return registerSuccessAction({ currentUser });
+            return loginSuccessAction({ currentUser });
           }),
           catchError((errorResponse: HttpErrorResponse) =>
-            of(registerFailureAction({ errors: errorResponse.error.errors }))
+            of(loginFailureAction({ errors: errorResponse.error.errors }))
           )
         )
       )
@@ -40,7 +40,7 @@ export class RegisterEffect {
   redirectAfterSubmit$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(registerSuccessAction),
+        ofType(loginSuccessAction),
         tap(() => {
           this.router.navigateByUrl('/');
         })

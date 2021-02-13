@@ -1,49 +1,174 @@
-<div class="auth-page">
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-6 offset-md-3 col-xs-12">
-        <h1 class="text-xs-center">Sign Up</h1>
-        <p class="text-xs-center">
-          <a [routerLink]="['/login']" class="text-success text-center">
-            Have an account?</a
-          >
-        </p>
-        BackendErrors are here.
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-          <fieldset>
-            <fieldset class="form-group">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Username"
-                formControlName="username"
+<div class="full-page register-page">
+  <div class="content">
+    <div class="container">
+      <div class="row animate__animated animate__fadeIn">
+        <div class="col-md-5 ml-auto">
+          <div class="row h-100">
+            <div class="col-md-12">
+              <img
+                alt="Recruiter Register"
+                class="card-img img-computer-men d-none d-sm-none d-md-block mt-5"
+                src="assets/img/computer-men-3-without.png"
               />
-            </fieldset>
-            <fieldset class="form-group">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Email"
-                formControlName="email"
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7 mr-auto animate__animated animate__fadeIn">
+          <div class="card card-register border card-white border-violet">
+            <div class="card-header">
+              <img
+                alt="Recruiter Register"
+                class="card-img"
+                src="assets/img/card-info.png"
               />
-            </fieldset>
-            <fieldset class="form-group">
-              <input
-                type="password"
-                class="form-control"
-                placeholder="Password"
-                formControlName="password"
-              />
-            </fieldset>
-            <button
-              class="btn btn-md btn-success btn-simple btn-block pull-xs-right"
-              type="submit"
-              [disabled]="isSubmitting$ | async"
+
+              <h5 class="card-title ml-1">sign up</h5>
+            </div>
+
+            <form
+              class="form"
+              [formGroup]="registerForm"
+              (ngSubmit)="onSubmit()"
             >
-              Sign Up
-            </button>
-          </fieldset>
-        </form>
+              <div class="card-body">
+                <div
+                  class="input-group"
+                  [ngClass]="{ 'input-group-focus': focus1 === true }"
+                >
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="tim-icons icon-badge"> </i>
+                    </div>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Username"
+                    type="text"
+                    (blur)="focus1 = false"
+                    (focus)="focus1 = true"
+                    formControlName="username"
+                    [class.is-invalid]="
+                      formControls.username.invalid &&
+                      (formControls.username.dirty ||
+                        formControls.username.touched)
+                    "
+                    [class.is-valid]="
+                      !formControls.username.invalid &&
+                      (formControls.username.dirty ||
+                        formControls.username.touched)
+                    "
+                  />
+                  <div
+                    class="invalid-feedback animate__animated animate__fadeIn"
+                  >
+                    * This field is required.
+                  </div>
+                </div>
+
+                <div
+                  class="input-group has-label"
+                  [ngClass]="{ 'input-group-focus': focus2 === true }"
+                >
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="tim-icons icon-email-85"> </i>
+                    </div>
+                  </div>
+
+                  <input
+                    class="form-control"
+                    placeholder="Email"
+                    type="text"
+                    (blur)="focus2 = false"
+                    (focus)="focus2 = true"
+                    formControlName="email"
+                    [class.is-invalid]="
+                      formControls.email.invalid &&
+                      (formControls.email.dirty || formControls.email.touched)
+                    "
+                    [class.is-valid]="
+                      !formControls.email.invalid &&
+                      (formControls.email.dirty || formControls.email.touched)
+                    "
+                  />
+                  <div
+                    class="invalid-feedback animate__animated animate__fadeIn"
+                  >
+                    * Please enter a valid email address.
+                  </div>
+                </div>
+
+                <div
+                  class="input-group"
+                  [ngClass]="{ 'input-group-focus': focus3 === true }"
+                >
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="tim-icons icon-key-25"> </i>
+                    </div>
+                  </div>
+                  <input
+                    class="form-control"
+                    placeholder="Password"
+                    type="password"
+                    (blur)="focus3 = false"
+                    (focus)="focus3 = true"
+                    formControlName="password"
+                    [class.is-invalid]="
+                      formControls.password.invalid &&
+                      (formControls.password.dirty ||
+                        formControls.password.touched)
+                    "
+                    [class.is-valid]="
+                      !formControls.password.invalid &&
+                      (formControls.password.dirty ||
+                        formControls.password.touched)
+                    "
+                  />
+                  <div
+                    class="invalid-feedback animate__animated animate__fadeIn"
+                  >
+                    * Password must be contains more than 6 characters.
+                  </div>
+                </div>
+
+                <div class="row" *ngIf="backendErrors$ | async">
+                  <div class="col-md-12 col-sm-12 p-2">
+                    <app-backend-error-messages
+                      [backendErrors]="backendErrors$ | async"
+                    ></app-backend-error-messages>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-lg-6 col-12">
+                    <button
+                      [disabled]="
+                        registerForm.invalid || (isSubmitting$ | async)
+                      "
+                      class="btn btn-info btn-simple btn-round btn-lg"
+                      type="submit"
+                    >
+                      Register
+                    </button>
+                  </div>
+                  <div class="col-lg-6 col-12">
+                    <label class="form-check-label mt-3">
+                      <a
+                        [routerLink]="['/login']"
+                        routerLinkActive="router-link-active"
+                        href="javascript:void(0)"
+                      >
+                        ¿Do you already have an account?</a
+                      >
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>

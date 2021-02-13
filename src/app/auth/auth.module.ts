@@ -1,3 +1,4 @@
+import { BackendErrorMessagesModule } from './../shared/modules/backend-error-messages/backend-error-messages.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
@@ -10,6 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { RegisterEffect } from 'src/app/auth/store/effects/register.effect';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {
@@ -19,13 +21,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [RegisterComponent],
+  declarations: [RegisterComponent, LoginComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     StoreModule.forFeature('auth', authReducers),
     EffectsModule.forFeature([RegisterEffect]),
+    BackendErrorMessagesModule,
   ],
   providers: [AuthService],
 })

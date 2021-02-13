@@ -1,0 +1,115 @@
+<!-- <app-auth-navbar></app-auth-navbar> -->
+<div class="full-page login-page">
+  <div class="content">
+    <div class="container">
+      <div
+        class="col-lg-6 col-md-8 ml-auto mr-auto animate__animated animate__fadeIn"
+      >
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+          <div class="card card-login card-white">
+            <div class="card-header">
+              <img class="card-img" alt="" src="assets/img/card-info.png" />
+
+              <h1 class="card-title ml-1">Log in</h1>
+            </div>
+            <div class="card-body">
+              <div
+                class="input-group"
+                [ngClass]="{ 'input-group-focus': focus === true }"
+              >
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="tim-icons icon-email-85"> </i>
+                  </div>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="Email"
+                  type="text"
+                  (blur)="focus = false"
+                  (focus)="focus = true"
+                  formControlName="email"
+                  [class.is-invalid]="
+                    formControls.email.invalid &&
+                    (formControls.email.dirty || formControls.email.touched)
+                  "
+                  [class.is-valid]="
+                    !formControls.email.invalid &&
+                    (formControls.email.dirty || formControls.email.touched)
+                  "
+                />
+                <div class="invalid-feedback animate__animated animate__fadeIn">
+                  * Please enter a valid email address.
+                </div>
+              </div>
+              <div
+                class="input-group"
+                [ngClass]="{ 'input-group-focus': focus1 === true }"
+              >
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="tim-icons icon-lock-circle"> </i>
+                  </div>
+                </div>
+                <input
+                  class="form-control"
+                  placeholder="Password"
+                  type="password"
+                  (blur)="focus1 = false"
+                  (focus)="focus1 = true"
+                  formControlName="password"
+                  [class.is-invalid]="
+                    formControls.password.invalid &&
+                    (formControls.password.dirty ||
+                      formControls.password.touched)
+                  "
+                  [class.is-valid]="
+                    !formControls.password.invalid &&
+                    (formControls.password.dirty ||
+                      formControls.password.touched)
+                  "
+                />
+                <div class="invalid-feedback animate__animated animate__fadeIn">
+                  * Password must be contains more than 6 characters.
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button
+                [disabled]="loginForm.invalid"
+                class="btn btn-info btn-lg btn-block animation-on-hover mb-3"
+                type="submit"
+              >
+                Login
+              </button>
+              <div class="pull-left">
+                <h6>
+                  <a
+                    class="link footer-link"
+                    [routerLink]="['/register']"
+                    routerLinkActive="router-link-active"
+                    href="javascript:void(0)"
+                  >
+                    Create Account
+                  </a>
+                </h6>
+              </div>
+              <div class="pull-right">
+                <h6>
+                  <a
+                    class="link footer-link"
+                    [routerLink]="['/forgot-password']"
+                    routerLinkActive="router-link-active"
+                    href="javascript:void(0)"
+                  >
+                    Forgot Password
+                  </a>
+                </h6>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
