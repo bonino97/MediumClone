@@ -1,22 +1,30 @@
-import { BackendErrorMessagesModule } from './../shared/modules/backend-error-messages/backend-error-messages.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
-import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { authReducers } from 'src/app/auth/store/reducer';
 import { EffectsModule } from '@ngrx/effects';
 
 import { RegisterEffect } from 'src/app/auth/store/effects/register.effect';
+import { LoginEffect } from 'src/app/auth/store/effects/login.effect';
+
+import { BackendErrorMessagesModule } from 'src/app/shared/modules/backend-error-messages/backend-error-messages.module';
+
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { LoginComponent } from './components/login/login.component';
+
+import { LoginComponent } from 'src/app/auth/components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
 ];
 
@@ -27,7 +35,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     StoreModule.forFeature('auth', authReducers),
-    EffectsModule.forFeature([RegisterEffect]),
+    EffectsModule.forFeature([RegisterEffect, LoginEffect]),
     BackendErrorMessagesModule,
   ],
   providers: [AuthService],

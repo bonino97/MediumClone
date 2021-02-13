@@ -73,10 +73,17 @@
                   * Password must be contains more than 6 characters.
                 </div>
               </div>
+              <div class="row" *ngIf="backendErrors$ | async">
+                <div class="col-md-12 col-sm-12 p-2">
+                  <app-backend-error-messages
+                    [backendErrors]="backendErrors$ | async"
+                  ></app-backend-error-messages>
+                </div>
+              </div>
             </div>
             <div class="card-footer">
               <button
-                [disabled]="loginForm.invalid"
+                [disabled]="loginForm.invalid || (isSubmitting$ | async)"
                 class="btn btn-info btn-lg btn-block animation-on-hover mb-3"
                 type="submit"
               >

@@ -17,13 +17,13 @@ import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.inter
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  focus1: any;
+  focus2: any;
+  focus3: any;
+
   registerForm: FormGroup;
   isSubmitting$: Observable<boolean>;
   backendErrors$: Observable<BackendErrorsInterface | null>;
-
-  focus1;
-  focus2;
-  focus3;
 
   constructor(private formBuilder: FormBuilder, private store: Store) {}
 

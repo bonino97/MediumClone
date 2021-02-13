@@ -125,7 +125,7 @@
 }
 
 .card-img {
-  width: 100%; // Required because we use flexbox and this inherently applies align-self: stretch
+  width: 60%; // Required because we use flexbox and this inherently applies align-self: stretch
   @include border-radius($card-inner-border-radius);
 }
 
