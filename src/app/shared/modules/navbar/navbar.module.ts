@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CollapseModule } from 'ngx-bootstrap';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { NavbarComponent } from 'src/app/shared/modules/navbar/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [NavbarComponent],

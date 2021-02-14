@@ -1,7 +1,7 @@
 import {
   registerSuccessAction,
   registerFailureAction,
-} from './actions/register.action';
+} from 'src/app/auth/store/actions/register.action';
 import { registerAction } from 'src/app/auth/store/actions/register.action';
 import { Action, createReducer, on } from '@ngrx/store';
 import { AuthStateInterface } from 'src/app/auth/types/authState.interface';
