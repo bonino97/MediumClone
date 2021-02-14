@@ -1,3 +1,4 @@
+import { NavbarModule } from './shared/modules/navbar/navbar.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
@@ -24,6 +25,7 @@ import { environment } from 'src/environments/environment';
       logOnly: environment.production, // Restrict extension to log-only mode
     }),
     EffectsModule.forRoot([]),
+    NavbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
