@@ -1,7 +1,7 @@
 .main-panel {
   &,
-  &[data="red"] {
-    border-color: $danger;
+  &[data="blue"] {
+    border-color: $info;
   }
 
   .content {
