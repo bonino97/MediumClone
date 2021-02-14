@@ -29,20 +29,48 @@
     <div class="navbar-collapse" [collapse]="isCollapsed" id="navigation">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a
-            class="nav-link recruiter-navbar-color"
-            [routerLink]="['/register']"
-          >
-            <i class="tim-icons icon-laptop recruiter-navbar-color"> </i>
-            Register
+          <a class="nav-link" [routerLink]="['/']">
+            <i class="fas fa-home"></i>
+            Home
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link recruiter-navbar-color" [routerLink]="['/login']">
-            <i class="tim-icons icon-single-02 recruiter-navbar-color"> </i>
-            Login
-          </a>
-        </li>
+        <ng-container *ngIf="isLoggedIn$ | async">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/articles/new']">
+              <i class="fas fa-edit"></i>
+              New Post
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/settings']">
+              <i class="tim-icons icon-settings-gear-63"></i>
+              Settings
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="['/profiles', (currentUser$ | async).username]"
+            >
+              <img alt="Profile Photo" src="(currentUser$ | async).image" />
+              {{ (currentUser$ | async).username }}
+            </a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="isAnonymus$ | async">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/register']">
+              <i class="fas fa-laptop"></i>
+              Register
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/login']">
+              <i class="fas fa-user"></i>
+              Login
+            </a>
+          </li>
+        </ng-container>
         <li class="separator d-lg-none"></li>
       </ul>
     </div>

@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { RegisterEffect } from 'src/app/auth/store/effects/register.effect';
 import { LoginEffect } from 'src/app/auth/store/effects/login.effect';
+import { GetCurrentUserEffect } from 'src/app/auth/store/effects/getCurrentUser.effect';
 
 import { BackendErrorMessagesModule } from 'src/app/shared/modules/backend-error-messages/backend-error-messages.module';
 
@@ -35,7 +36,11 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     StoreModule.forFeature('auth', authReducers),
-    EffectsModule.forFeature([RegisterEffect, LoginEffect]),
+    EffectsModule.forFeature([
+      RegisterEffect,
+      LoginEffect,
+      GetCurrentUserEffect,
+    ]),
     BackendErrorMessagesModule,
   ],
   providers: [AuthService],
